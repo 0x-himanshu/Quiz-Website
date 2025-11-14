@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BACKBENCHARS QUIZ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+</head>
+<body>
+    <div class="cursor-trail"></div>
+
+    <button id="permanentBackButton" class="neon-button permanent-back-button" style="display: none;">
+        &larr;
+    </button> 
+
+    <header class="header">
+        <h1 class="app-title">BACKBENCHARS QUIZ</h1>
+        <div class="theme-switch-wrapper">
+            <span class="theme-label">🌙</span>
+            <label class="theme-switch">
+                <input type="checkbox" id="themeToggle">
+                <span class="slider round"></span>
+            </label>
+            <span class="theme-label">☀️</span>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section id="homeScreen" class="screen active">
+            <h2 style="text-align: center;">Select a Subject Category</h2>
+            <div class="search-bar-container">
+                <input type="text" id="categorySearch" placeholder="Search categories..." aria-label="Search quiz categories">
+            </div>
+            <div id="categoryList" class="category-grid">
+                <div class="category-card skeleton"></div>
+                <div class="category-card skeleton"></div>
+            </div>
+        </section>
+
+        <section id="subCategoryScreen" class="screen">
+            <h2 id="subCategoryTitle">Units/Topics</h2>
+            <div id="subCategoryList" class="category-grid">
+                </div>
+        </section>
+
+        <section id="quizPanel" class="screen">
+            <div class="quiz-header">
+                <h2 id="quizCategoryTitle"  style="text-align: center;">Quiz Category - Unit</h2>
+                <div class="timer-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <p id="questionText" class="question-text">Loading question...</p>
+                <div id="optionsContainer" class="options-grid">
+                    <button class="option-btn skeleton"></button>
+                    <button class="option-btn skeleton"></button>
+                    <button class="option-btn skeleton"></button>
+                    <button class="option-btn skeleton"></button>
+                </div>
+                <div class="quiz-controls">
+                    <p class="score-display">Score: <span id="currentScore">0</span></p>
+                    <button id="nextButton" class="neon-button" style="display:none;" disabled>Next</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="endScreen" class="screen">
+            <h2>Quiz Completed!</h2>
+            <p class="final-score">Your Final Score: <span id="finalScore">0</span></p>
+            <div class="end-screen-actions">
+                <button id="restartQuizButton" class="neon-button">Restart Quiz</button> 
+                <button id="backToHomeButton" class="neon-button">Back to Subjects</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

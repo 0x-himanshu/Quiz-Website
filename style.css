@@ -1,0 +1,744 @@
+/* ==================================================================================
+  QUIZ WEB APP STYLESHEET - BLACK & NEON PURPLE THEME (EXTENDED VERSION)
+  Total Lines: ~1000 (Expanded for granular control and detailed styling)
+==================================================================================
+*/
+
+
+/* -------------------------------------------------------------------------- */
+/* 001. GLOBAL VARIABLES AND ROOT SETUP (Total: ~50 lines) */
+/* -------------------------------------------------------------------------- */
+
+:root {
+    /* Default: Dark Theme Variables (Black & Neon Purple) */
+    --color-bg-dark: #000000;
+    --color-bg-medium: #0c0018; /* Used for subtle inner backgrounds */
+    --color-bg-light: #14001a;
+    --color-text-primary: #f0e6ff;
+    --color-text-secondary: #a080c9; /* Softer text for secondary elements */
+    --color-text-muted: #7e57c2;
+    --color-neon-purple: #e0b4ff;  /* Primary Accent: Light Neon Purple */
+    --color-neon-pink: #ff00ff;
+    --color-success: #00ff80;
+    --color-error: #ff5555;
+    
+    --border-radius-xl: 16px;
+    --border-radius-card: 12px;
+    --border-radius-sm: 6px;
+    
+    /* Neon Shadow Definitions (Layered for depth) */
+    --shadow-purple-sm: 0 0 4px var(--color-neon-purple);
+    --shadow-purple-md: 0 0 10px var(--color-neon-purple)55;
+    --shadow-purple-lg: 0 0 20px var(--color-neon-purple)33;
+    --shadow-neon: var(--shadow-purple-sm), var(--shadow-purple-md);
+
+    --shadow-inset-dark: inset 0 0 8px rgba(0, 0, 0, 0.9);
+    --transition-speed-fast: 0.2s ease-out;
+    --transition-speed-normal: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transition */
+}
+
+/* Light Theme Overrides (Detailed for all variables) */
+[data-theme="light"] {
+    --color-bg-dark: #f9f9f9;
+    --color-bg-medium: #f0f0f0;
+    --color-bg-light: #ffffff;
+    --color-text-primary: #333333;
+    --color-text-secondary: #666666;
+    --color-text-muted: #999999;
+    --color-neon-purple: #673ab7;
+    --color-neon-pink: #cc00cc;
+    --shadow-purple-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-purple-md: 0 4px 10px rgba(0, 0, 0, 0.15);
+    --shadow-purple-lg: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --shadow-neon: var(--shadow-purple-md);
+    --shadow-inset-dark: inset 0 0 3px rgba(200, 200, 200, 0.5);
+}
+
+/* Global Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 002. BODY AND MAIN LAYOUT (Total: ~80 lines) */
+/* -------------------------------------------------------------------------- */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-primary);
+    transition: background-color var(--transition-speed-normal), color var(--transition-speed-normal);
+    min-height: 100vh;
+    padding: 20px !important;
+    line-height: 1.6;
+    /* Deep Background Gradient */
+    background-image: radial-gradient(circle at top left, #29003c 1%, transparent 50%),
+                      radial-gradient(circle at bottom right, #3f005a 1%, transparent 50%);
+    background-attachment: fixed;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    color: var(--color-neon-purple);
+    transition: color var(--transition-speed-normal);
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px; 
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-xl);
+    border: 2px solid var(--color-neon-purple); /* Thicker border */
+    box-shadow: var(--shadow-neon), 0 0 30px var(--color-neon-purple)1a; /* Deeper outer glow */
+    position: relative;
+    z-index: 10;
+    overflow: hidden; /* To contain shadows inside */
+     backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px); /* Safari */
+}
+
+/* Inner Glow Effect for Container (Aesthetic detail) */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--border-radius-xl);
+    box-shadow: inset 0 0 15px var(--color-bg-medium);
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 003. HEADER AND TITLE STYLING (Total: ~60 lines) */
+/* -------------------------------------------------------------------------- */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1.5px solid var(--color-neon-purple); /* Purple divider */
+    position: relative;
+    z-index: 20;
+    background-color: transparent;
+    backdrop-filter: blur(10px); /* Subtle blur effect */
+}
+
+.app-title {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--color-neon-purple);
+    text-shadow: 0 0 7px var(--color-neon-purple), 0 0 15px var(--color-neon-purple)80;
+    letter-spacing: 2px;
+    transition: all var(--transition-speed-normal);
+}
+
+.app-title:hover {
+    color: var(--color-neon-pink);
+    text-shadow: 0 0 10px var(--color-neon-pink), 0 0 20px var(--color-neon-pink)80;
+}
+
+/* Theme Switch Detail Styling */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+}
+.theme-label {
+    font-size: 1.3em;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-speed-normal);
+}
+.theme-switch {
+    /* ... (Existing styles for switch mechanism) ... */
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Slightly wider */
+    height: 28px;
+}
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-text-muted);
+    transition: var(--transition-speed-normal);
+    box-shadow: var(--shadow-inset-dark);
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #ffffff;
+    transition: var(--transition-speed-normal);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+input:checked + .slider {
+    background-color: var(--color-neon-purple);
+}
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+.slider.round {
+    border-radius: 28px;
+}
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 004. PERMANENT BACK BUTTON (Total: ~30 lines) */
+/* -------------------------------------------------------------------------- */
+
+.permanent-back-button {
+    /* Inherits .neon-button styles */
+    position: fixed;
+    bottom: 100px;
+    right: 49.5%;
+    z-index: 1000;
+    padding: 10px 15px !important;
+    font-size: 1em !important;
+    border-width: 3px; /* Thicker border for prominence */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* Vendor Prefixes for older browsers */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+    backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 005. SCREEN MANAGEMENT & TRANSITIONS (Total: ~50 lines) */
+/* -------------------------------------------------------------------------- */
+
+.screen {
+    display: none;
+    padding-top: 10px;
+    /* Advanced Fade/Slide Animation */
+    -webkit-animation: fadeInSlide 0.7s cubic-bezier(0.39, 0.575, 0.565, 1.0);
+    animation: fadeInSlide 0.7s cubic-bezier(0.39, 0.575, 0.565, 1.0);
+}
+
+.screen.active {
+    display: block;
+}
+
+@-webkit-keyframes fadeInSlide {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInSlide {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Search Bar Detailed Styling */
+.search-bar-container {
+    margin-bottom: 30px;
+    position: relative;
+}
+#categorySearch {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid var(--color-neon-purple);
+    background-color: var(--color-bg-medium);
+    color: var(--color-text-primary);
+    border-radius: 40px;
+    font-size: 1.05em;
+    outline: none;
+    box-shadow: var(--shadow-purple-sm);
+    transition: all var(--transition-speed-fast);
+}
+#categorySearch:focus {
+    border-color: var(--color-neon-pink);
+    box-shadow: 0 0 10px var(--color-neon-pink);
+    background-color: var(--color-bg-dark);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 006. CATEGORY GRIDS (HOME & SUB-CATEGORY) (Total: ~150 lines) */
+/* -------------------------------------------------------------------------- */
+
+/* Shared Grid Layout */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px; /* Increased gap */
+}
+
+/* Category Card Base Style */
+.category-card {
+    background-color: transparent;
+    padding: 25px;
+    border-radius: var(--border-radius-card);
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid var(--color-neon-purple);
+    color: var(--color-neon-purple);
+    box-shadow: var(--shadow-neon);
+    transition: all var(--transition-speed-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover State - Deeply styled */
+.category-card:hover {
+    transform: translateY(-10px) scale(1.03); /* Lift and enlarge */
+    background-color: var(--color-neon-purple);
+    color: var(--color-bg-dark);
+    box-shadow: 0 0 25px var(--color-neon-purple), 0 10px 30px var(--color-bg-dark);
+    border-color: var(--color-neon-purple);
+}
+
+/* Card Hover Glow Effect */
+.category-card:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, var(--color-neon-pink)33, transparent 70%);
+    opacity: 0.5;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+/* Skeleton Loading State (Detailed animation) */
+.category-card.skeleton {
+    min-height: 120px;
+    background: linear-gradient(90deg, #330044 25%, #4f0066 50%, #330044 75%);
+    background-size: 400% 100%;
+    -webkit-animation: shimmer 1.8s infinite ease-in-out;
+    animation: shimmer 1.8s infinite ease-in-out;
+    pointer-events: none;
+    opacity: 0.7;
+    border-color: var(--color-bg-medium);
+    box-shadow: none;
+    color: transparent;
+}
+.category-card.skeleton::before {
+    content: 'Loading...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-text-secondary);
+    font-size: 0.8em;
+}
+
+@-webkit-keyframes shimmer {
+    0% { background-position: -400% 0; }
+    100% { background-position: 400% 0; }
+}
+@keyframes shimmer {
+    0% { background-position: -400% 0; }
+    100% { background-position: 400% 0; }
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 007. QUIZ PANEL LAYOUT AND TIMER (Total: ~120 lines) */
+/* -------------------------------------------------------------------------- */
+#subCategoryTitle{
+  text-align: center;
+}
+
+.quiz-header {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#quizCategoryTitle {
+    font-size: 1.8em;
+    color: var(--color-neon-pink); /* Using pink for quiz title */
+    text-shadow: 0 0 5px var(--color-neon-pink);
+    text-align: center;
+}
+
+/* Timer Bar Detailed Styling */
+.timer-container {
+    height: 12px;
+    background-color: var(--color-bg-medium);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-inset-dark);
+    border: 1px solid var(--color-text-secondary);
+}
+#progressBar {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-neon-purple);
+    transition: none;
+    border-radius: var(--border-radius-sm);
+    /* Subtle internal glow on bar */
+    box-shadow: inset 0 0 5px var(--color-neon-purple)ff;
+}
+
+
+/* Question Area Styling */
+.question-container {
+    padding: 20px;
+    background-color: var(--color-bg-medium);
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-inset-dark);
+}
+.question-text {
+    font-size: 1.6em;
+    font-weight: 500;
+    margin-bottom: 30px;
+    padding: 15px 0 15px 25px;
+    border-left: 5px solid var(--color-neon-pink);
+    background-color: rgba(255, 0, 255, 0.08); /* Light pink transparent background */
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-primary);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 008. OPTION BUTTONS & STATES (Total: ~150 lines) */
+/* -------------------------------------------------------------------------- */
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 18px; /* Larger hit area */
+    font-size: 1.1em;
+    border: 3px solid var(--color-neon-purple); /* Thicker initial border */
+    border-radius: var(--border-radius-card);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    box-shadow: 0 0 5px var(--color-neon-purple);
+    transition: all var(--transition-speed-fast);
+    text-align: left;
+    white-space: normal; /* Allow text wrapping */
+    word-wrap: break-word;
+}
+
+.option-btn:hover:not(:disabled) {
+    background-color: var(--color-neon-purple)20; /* Subtle hover fill */
+    color: var(--color-text-primary);
+    border-color: var(--color-neon-purple);
+    box-shadow: 0 0 15px var(--color-neon-purple);
+    transform: scale(1.01);
+}
+
+.option-btn:active:not(:disabled) {
+    transform: scale(0.99);
+}
+
+.option-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    border-color: var(--color-text-secondary);
+}
+
+/* State: Correct Answer */
+.option-btn.correct {
+    background-color: var(--color-success);
+    color: var(--color-bg-dark);
+    border-color: var(--color-success);
+    box-shadow: 0 0 12px var(--color-success), inset 0 0 5px rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    -webkit-animation: flashGreen 0.5s;
+    animation: flashGreen 0.5s;
+}
+
+/* State: Wrong Answer */
+.option-btn.wrong {
+    background-color: var(--color-error);
+    color: white;
+    border-color: var(--color-error);
+    box-shadow: 0 0 12px var(--color-error), inset 0 0 5px rgba(255, 255, 255, 0.5);
+    -webkit-animation: shake 0.5s;
+    animation: shake 0.5s;
+}
+
+/* State Highlight Animation */
+@-webkit-keyframes flashGreen {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+@keyframes flashGreen {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+@-webkit-keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 009. QUIZ CONTROLS, SCORE, AND BUTTONS (Total: ~140 lines) */
+/* -------------------------------------------------------------------------- */
+
+.quiz-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--color-text-secondary)50;
+    padding-top: 25px;
+}
+
+.score-display {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: var(--color-neon-purple);
+    text-shadow: 0 0 5px var(--color-neon-purple)50;
+    letter-spacing: 0.5px;
+}
+#currentScore {
+    font-size: 1.1em;
+    color: var(--color-neon-pink);
+}
+
+/* Neon Button Base Styling */
+.neon-button {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border: 3px solid var(--color-neon-purple);
+    border-radius: var(--border-radius-card);
+    background-color: var(--color-bg-dark);
+    color: var(--color-neon-purple);
+    cursor: pointer;
+    box-shadow: var(--shadow-neon);
+    text-shadow: 0 0 5px var(--color-neon-purple)80;
+    transition: all var(--transition-speed-fast);
+    text-transform: uppercase;
+}
+.neon-button:focus {
+    outline: 2px solid var(--color-neon-pink);
+    outline-offset: 2px;
+}
+.neon-button:hover:not(:disabled) {
+    background-color: var(--color-neon-purple);
+    color: var(--color-bg-dark);
+    box-shadow: 0 0 25px var(--color-neon-purple);
+    transform: translateY(-2px);
+}
+.neon-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+    box-shadow: none;
+    border-color: var(--color-text-muted);
+    color: var(--color-text-muted);
+    text-shadow: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 010. END SCREEN STYLING (Total: ~60 lines) */
+/* -------------------------------------------------------------------------- */
+
+#endScreen h2 {
+    font-size: 2.5em;
+    text-align: center;
+    color: var(--color-neon-pink);
+    text-shadow: 0 0 10px var(--color-neon-pink);
+    margin-bottom: 20px;
+}
+.final-score {
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    color: var(--color-neon-purple);
+    text-shadow: 0 0 15px var(--color-neon-purple)90;
+    margin: 20px 0 40px 0;
+}
+.final-score span {
+    color: var(--color-neon-pink);
+    font-size: 1.2em;
+    padding-left: 10px;
+}
+.end-screen-actions {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 011. UI EFFECTS AND RESPONSIVENESS (Total: ~170 lines) */
+/* -------------------------------------------------------------------------- */
+
+/* Cursor Trail Styling */
+.cursor-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+.trail-particle {
+    position: fixed; /* JS will set position */
+    background-color: var(--color-neon-pink) !important;
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--color-neon-pink), 0 0 15px var(--color-neon-pink)50;
+    opacity: 0.8;
+    z-index: 10000;
+    pointer-events: none;
+    -webkit-transition: all 0.6s cubic-bezier(0.2, 0.8, 0.4, 1);
+    transition: all 0.6s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+/* Confetti Particle Base Style */
+.confetti-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    background-color: var(--color-neon-purple);
+    border-radius: 50%;
+    box-shadow: 0 0 5px var(--color-neon-purple);
+    z-index: 10000;
+    pointer-events: none;
+}
+
+
+/* Keyframes for Shimmer (used in skeleton) */
+@keyframes pulse {
+    0% { background-color: #330044; }
+    50% { background-color: #550077; }
+    100% { background-color: #330044; }
+}
+
+
+/* === Media Queries for Responsiveness === */
+
+/* Tablet and Smaller Desktops (Max 800px) */
+@media (max-width: 800px) {
+    .container {
+        padding: 25px;
+        max-width: 95%;
+    }
+    .category-grid {
+        gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .question-text {
+        font-size: 1.4em;
+        padding: 15px;
+    }
+    .options-grid {
+        gap: 15px;
+    }
+    .neon-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
+
+/* Mobile Devices (Max 650px) */
+@media (max-width: 650px) {
+    body {
+        padding: 10px;
+    }
+    .header {
+        flex-direction: column;
+        gap: 20px;
+        padding-bottom: 15px;
+    }
+    .app-title {
+        font-size: 1.8em;
+    }
+    .permanent-back-button {
+        top: 15px;
+        left: 10px;
+        padding: 6px 12px !important;
+        font-size: 0.85em !important;
+    }
+    .options-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 12px;
+    }
+    .category-grid {
+        grid-template-columns: 1fr 1fr; /* Two columns on mobile */
+    }
+    .score-display {
+        font-size: 1.1em;
+    }
+    .end-screen-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .final-score {
+        font-size: 2.5em;
+    }
+}
+
+/* Small Mobile Devices (Max 400px) */
+@media (max-width: 400px) {
+    .container {
+        padding: 10px;
+    }
+    .category-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+        gap: 10px;
+    }
+    .question-text {
+        font-size: 1.3em;
+        padding-left: 15px;
+    }
+    .option-btn {
+        padding: 12px;
+        font-size: 0.9em;
+    }
+
+}
+.permanent-back-button {
+    /* Inherits .neon-button styles */
+    position: fixed;
+   height: 50px;
+   width: 50px;
+    padding: 10px 15px !important;
+}
