@@ -12,10 +12,10 @@
 // --- 1. CONFIGURATION ---
 
 const SHEET_BASE_URL = "https://script.google.com/macros/s/AKfycbz-joLFFraia3zHDWK2_-spuEZuGPbvZ6fULaGjaaX_2c2jYlzlpgwP_eB7lYDAQ4sq9g/exec";
-const QUIZ_TIME_SECONDS = 15; 
+const QUIZ_TIME_SECONDS = 20; 
 const SOUND_CORRECT_URL = "https://cdn.jsdelivr.net/gh/himanshudc/cdn/correct.mp3"; 
 const SOUND_WRONG_URL = "https://cdn.jsdelivr.net/gh/himanshudc/cdn/wrong.mp3"; 
-const AUTO_NEXT_DELAY_MS = 1500; // 1.5 seconds delay before moving to the next question
+const AUTO_NEXT_DELAY_MS = 2000; // 1.5 seconds delay before moving to the next question
 
 // --- 2. GLOBAL STATE ---
 
@@ -506,4 +506,5 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 4. Start the application by fetching MAIN categories
     fetchMainCategories();
+
 });
