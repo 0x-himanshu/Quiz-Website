@@ -12,7 +12,7 @@
 // --- 1. CONFIGURATION ---
 
 const SHEET_BASE_URL = "https://script.google.com/macros/s/AKfycbz-joLFFraia3zHDWK2_-spuEZuGPbvZ6fULaGjaaX_2c2jYlzlpgwP_eB7lYDAQ4sq9g/exec";
-const QUIZ_TIME_SECONDS = 20; 
+const QUIZ_TIME_SECONDS = 15; 
 const SOUND_CORRECT_URL = "https://cdn.jsdelivr.net/gh/himanshudc/cdn/correct.mp3"; 
 const SOUND_WRONG_URL = "https://cdn.jsdelivr.net/gh/himanshudc/cdn/wrong.mp3"; 
 const AUTO_NEXT_DELAY_MS = 2000; // 1.5 seconds delay before moving to the next question
@@ -54,20 +54,25 @@ const QUIZ_STRUCTURE = {
         { name: "Big Data UT1 (I)",   sheet: "BD UT1 (I)" },
         { name: "Big Data UT1 (II)",  sheet: "BD UT1 (II)" },
         { name: "Big Data UT1 (III)", sheet: "BD UT1 (III)" },
-        { name: "Big Data UT1 (IV)",  sheet: "BD UT1 (IV)" },
         { name: "Big Data UT2 (I)",   sheet: "BD UT2 (I)" },
         { name: "Big Data UT2 (II)",  sheet: "BD UT2 (II)" },
         { name: "Big Data UT2 (III)", sheet: "BD UT2 (III)" },
-        { name: "Big Data UT2 (IV)",  sheet: "BD UT2 (IV)" },
         { name: "Big Data UT3 (I)",   sheet: "BD UT3 (I)" },
         { name: "Big Data UT3 (II)",  sheet: "BD UT3 (II)" },
-        { name: "Big Data UT3 (III)", sheet: "BD UT3 (III)" },
-        { name: "Big Data UT3 (IV)",  sheet: "BD UT3 (IV)" },
         { name: "Big Data UT4 (I)",   sheet: "BD UT4 (I)" },
         { name: "Big Data UT4 (II)",  sheet: "BD UT4 (II)" },
         { name: "Big Data UT4 (III)", sheet: "BD UT4 (III)" },
-        { name: "Big Data UT4 (IV)",  sheet: "BD UT4 (IV)" },
+    ],
+      "Python": [
+    
+        { name: "Introduction", sheet: "Introduction" },
+        { name: "Variables", sheet: "Variables" },
+        { name: "Controlflow", sheet: "Controlflow" },
+        { name: "Strings", sheet: "Strings" }
+
     ]
+
+
     // Add all your subjects and units here
 };
 
@@ -256,7 +261,7 @@ const loadQuiz = async (sheetName) => {
     currentQuestionIndex = 0;
     score = 0;
     elements.currentScore.textContent = score;
-    elements.questionText.textContent = "Fetching questions, please wait...";
+    elements.questionText.textContent = "Loading questions, please wait...";
     elements.optionsContainer.innerHTML = ''; 
 
     const url = `${SHEET_BASE_URL}?sheet=${encodeURIComponent(sheetName)}`;
@@ -270,11 +275,11 @@ const loadQuiz = async (sheetName) => {
             currentQuizData = result.data;
             displayQuestion();
         } else {
-            elements.questionText.textContent = "No questions found for this category. Check your Google Sheet name/data.";
+            elements.questionText.textContent = "No questions available for this category..";
         }
     } catch (error) {
         console.error("Failed to fetch quiz data:", error);
-        elements.questionText.textContent = `API Error: Check URL and Apps Script deployment. (${error.message})`;
+        elements.questionText.textContent = `Something Went Wrong. (${error.message})`;
     }
 };
 
@@ -366,7 +371,7 @@ const checkAnswer = (selectedButton, correctAnswer, isTimeout = false) => {
     }
 
     // *** AUTO-NEXT LOGIC ***
-    // 1.5 सेकंड बाद अगले प्रश्न पर जाएं (Smooth transition)
+    // 2 सेकंड बाद अगले प्रश्न पर जाएं (Smooth transition)
     setTimeout(() => {
         nextQuestion();
     }, AUTO_NEXT_DELAY_MS);
@@ -506,6 +511,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 4. Start the application by fetching MAIN categories
     fetchMainCategories();
-
 });
-
